@@ -6,6 +6,46 @@ import { VisuallyHiddenInput } from '../componenets/styles/StyledComponents';
 function Login() {
 
   const [isLogin, setIsLogin] = useState(true)
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("")
+  const [name, setName] = useState("")
+
+  const [errors, setErrors] = useState({
+    username: "",
+    password: ""
+  });
+
+  // Handle username validation separately
+  const handleUsernameChange = (e) => {
+    const value = e.target.value;
+
+    if (/[^a-zA-Z0-9]/.test(value)) {
+      setErrors((prev) => ({
+        ...prev,
+        username: "Only letters and numbers are allowed",
+      }));
+    } else {
+      setErrors((prev) => ({ ...prev, username: "" }));
+    }
+
+    setUsername(value)
+  };
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+
+    if(value.length < 8) {
+      setErrors((prev) => ({
+        ...prev,
+        password: "Password must be at least 8 characters long"
+      }))
+    } else {
+      setErrors((prev) => ({ ...prev, password: "" }));
+    }
+
+    setPassword(value);
+  }
 
   return (
     <Container component={'main'} maxWidth='xs' 
@@ -22,6 +62,10 @@ function Login() {
                   label='Username'
                   margin='normal'
                   variant='outlined'
+                  value={username}
+                  onChange={handleUsernameChange}
+                  error={!!errors.username}
+                  helperText={errors.username}
                 />
 
                 <TextField 
@@ -31,6 +75,10 @@ function Login() {
                   type='password'
                   margin='normal'
                   variant='outlined'
+                  value={password}
+                  onChange={handlePasswordChange}
+                  error={!!errors.password}
+                  helperText={errors.password}
                 />
 
                 <Button 
@@ -52,7 +100,8 @@ function Login() {
                   Register
                 </Button>
               </form>
-            </> : 
+            </> 
+            : 
             <>
               <Typography variant='h5'>Register</Typography>
 
@@ -85,6 +134,8 @@ function Login() {
                   type='text'
                   margin='normal'
                   variant='outlined'
+                  value={name}
+                  onChange={(e) => {setName(e.target.value)}}
                 />
 
                 <TextField 
@@ -94,6 +145,8 @@ function Login() {
                   type='email'
                   margin='normal'
                   variant='outlined'
+                  value={email}
+                  onChange={(e) => {setEmail(e.target.value)}}
                 />
 
                 <TextField 
@@ -102,6 +155,10 @@ function Login() {
                   label='Username'
                   margin='normal'
                   variant='outlined'
+                  value={username}
+                  onChange={handleUsernameChange}
+                  error={!!errors.username}
+                  helperText={errors.username}
                 />
 
                 <TextField 
@@ -111,6 +168,10 @@ function Login() {
                   type='password'
                   margin='normal'
                   variant='outlined'
+                  value={password}
+                  onChange={handlePasswordChange}
+                  error={!!errors.password}
+                  helperText={errors.password}
                 />
 
                 <Button 
