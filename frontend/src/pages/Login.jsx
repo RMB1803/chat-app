@@ -10,13 +10,11 @@ function Login() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
-
   const [errors, setErrors] = useState({
     username: "",
     password: ""
   });
 
-  // Handle username validation separately
   const handleUsernameChange = (e) => {
     const value = e.target.value;
 
@@ -47,15 +45,24 @@ function Login() {
     setPassword(value);
   }
 
+  const handleLogin = (e) => {
+    e.preventDefault()
+  }
+
+  const handleRegister = (e) => {
+    e.preventDefault()
+  }
+
+
   return (
     <Container component={'main'} maxWidth='xs' 
     sx={{height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <Paper elevation={3} sx={{padding: 3, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <Paper elevation={3} sx={{padding: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', borderRadius: '1rem'}}>
             {isLogin ? 
             <>
               <Typography variant='h5'>Login</Typography>
 
-              <form className='w-full mt-4'>
+              <form className='w-full mt-4' onSubmit={handleLogin}>
                 <TextField 
                   required
                   fullWidth
@@ -105,7 +112,7 @@ function Login() {
             <>
               <Typography variant='h5'>Register</Typography>
 
-              <form className='w-full mt-4'>
+              <form className='w-full mt-4' onSubmit={handleRegister}>
                 <Stack position={'relative'} width={'10rem'} margin={'auto'}>
                   <Avatar sx={{width: '10rem', height: '10rem', objectFit: 'contain'}}/>
                   <IconButton 
