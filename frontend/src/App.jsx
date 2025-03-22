@@ -1,4 +1,4 @@
-import React, {lazy} from 'react'
+import React, {lazy, Suspense} from 'react'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import ProtectRoute from './componenets/auth/ProtectRoute'
 
@@ -13,12 +13,14 @@ let user = true
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<ProtectRoute user={user}> <Home /> </ProtectRoute>} />
-        <Route path='/chat/:chatId' element={<ProtectRoute user={user}> <Chat /> </ProtectRoute>} />
-        <Route path='/groups' element={<ProtectRoute user={user}> <Groups /> </ProtectRoute>} />
-        <Route path='/login' element={<ProtectRoute user={!user} redirect="/"> <Login /> </ProtectRoute>} />
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path='/' element={<ProtectRoute user={user}> <Home /> </ProtectRoute>} />
+          <Route path='/chat/:chatId' element={<ProtectRoute user={user}> <Chat /> </ProtectRoute>} />
+          <Route path='/groups' element={<ProtectRoute user={user}> <Groups /> </ProtectRoute>} />
+          <Route path='/login' element={<ProtectRoute user={!user} redirect="/"> <Login /> </ProtectRoute>} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   )
 }

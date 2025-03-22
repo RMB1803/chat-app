@@ -1,0 +1,5 @@
+export const orange = "#FFA500"
+export const black = "#000000"
+export const white = "#ffffff"
+export const red = "#FF0000"
+export const green = "#00FF00"
